@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas" width="640" height="480" style="background-color: #eee;"></canvas>
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    const images = ['./img/1.png', './img/2.png', './img/3.png', './img/4.png', './img/5.png'];
+    let mouseX;
+    let mouseY;
+
+    canvas.onclick = (e) => {
+      const imageNum = Math.floor(Math.random() * images.length);
+      img.src = images[imageNum];
+
+      let rect = e.target.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+
+      img.onload = () => {
+        ctx.drawImage(
+          img,
+          mouseX - 50,
+          mouseY - 50,
+        )
+      }
+    }
+  </script>
+</body>
+
+</html>
